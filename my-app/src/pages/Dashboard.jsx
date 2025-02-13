@@ -6,8 +6,8 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h2>Tableau de Bord</h2>
-      {user ? <p>Bienvenue, vous êtes connecté !</p> : <p>Chargement...</p>}
+      <h2>Prenez place</h2>
+      {user ? <p>Bienvenue, vous etes bien connecté !</p> : <p>ding ding ,ça charge </p>}
     </div>
   );
 };

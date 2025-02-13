@@ -1,4 +1,5 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useMemo, useCallback } from "react";
+
 
 export const UserContext = createContext();
 
@@ -11,19 +12,18 @@ export const UserProvider = ({ children }) => {
       setUser({ token });
     }
   }, []);
-
-  const login = (token) => {
+  const login = useCallback((token) => {
     localStorage.setItem("token", token);
     setUser({ token });
-  };
-
-  const logout = () => {
+  }, []);
+  const logout = useCallback(() => {
     localStorage.removeItem("token");
     setUser(null);
-  };
+  }, []);
+  const contextValue = useMemo(() => ({ user, login, logout }), [user, login, logout]);
 
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <UserContext.Provider value={contextValue}>
       {children}
     </UserContext.Provider>
   );
